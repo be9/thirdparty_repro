@@ -30,8 +30,3 @@ go_rules_dependencies()
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 gazelle_dependencies()
-
-local_repository(
-    name = "thirdparty",
-    path = "thirdparty",
-)

@@ -1,5 +1,5 @@
 load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_binary")
-load("//bzl:platforms.bzl", "platforms")
+load(":platforms.bzl", "platforms")
 
 def multi_platform_binaries(name, binary, target_platforms = platforms.all):
     """The multi_platform_binaries macro creates a the binary for each platform.
@@ -19,7 +19,7 @@ def multi_platform_binaries(name, binary, target_platforms = platforms.all):
             target_platform = platform.target_platform,
         )
 
-        target_label = Label("@{}//{}:{}".format(native.repo_name(), native.package_name(), target_name))
+        target_label = Label("@{}//{}:{}".format(native.repo_name().rstrip("~"), native.package_name(), target_name))
         targets.append(target_label)
 
     native.filegroup(
