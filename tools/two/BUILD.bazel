@@ -1,4 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("//build/bzl:multi_platform.bzl", "multi_platform_binaries")
 
 go_library(
     name = "two_lib",
@@ -12,4 +13,9 @@ go_binary(
     name = "two",
     embed = [":two_lib"],
     visibility = ["//visibility:public"],
+)
+
+multi_platform_binaries(
+    name = "multi_platform",
+    binary = ":two",
 )

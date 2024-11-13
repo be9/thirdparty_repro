@@ -1,0 +1,6 @@
+load("@thirdparty//bzl:multi_platform.bzl", "multi_platform_binaries")
+
+multi_platform_binaries(
+    name = "multi_platform",
+    binary = "@com_github_golang_protobuf//protoc-gen-go",
+)

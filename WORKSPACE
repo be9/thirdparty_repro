@@ -1,4 +1,4 @@
-workspace(name = "plaid-monorepo")
+workspace(name = "thirdparty-repro")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 
@@ -31,7 +31,7 @@ load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 gazelle_dependencies()
 
-# local_repository(
-#     name = "thirdparty",
-#     path = "thirdparty",
-# )
+local_repository(
+    name = "thirdparty",
+    path = "thirdparty",
+)

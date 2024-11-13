@@ -1,5 +1,32 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
 
 gazelle(
     name = "gazelle",
+)
+
+filegroup(
+    name = "tools_multiplatform",
+    srcs = [
+        "//tools/one:multi_platform",
+        "//tools/two:multi_platform",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+pkg_tar(
+    name = "tools_tar",
+    srcs = [":tools_multiplatform"],
+    visibility = ["//visibility:public"],
+    strip_prefix = ".",
+)
+
+pkg_tar(
+    name = "all_tools_tar",
+    srcs = [
+        ":tools_multiplatform",
+        "@thirdparty//tools:all_multi_platform",
+    ],
+    visibility = ["//visibility:public"],
+    strip_prefix = ".",
 )
