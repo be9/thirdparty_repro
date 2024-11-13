@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "one_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/be9/thirdparty_repro/tools/one",
+    visibility = ["//visibility:private"],
+    deps = ["@org_golang_x_example_hello//reverse"],
+)
+
+go_binary(
+    name = "one",
+    embed = [":one_lib"],
+    visibility = ["//visibility:public"],
+)

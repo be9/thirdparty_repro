@@ -1,0 +1,5 @@
+module(
+    name = "thirdparty_repro",
+)
+
+bazel_dep(name = "rules_pkg", version = "1.0.1")
