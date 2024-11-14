@@ -1,1 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
 # gazelle:proto disable_global
+
+go_library(
+    name = "thirdparty",
+    srcs = ["required.go"],
+    importpath = "github.com/be9/thirdparty_repro/thirdparty",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_daixiang0_gci//:go_default_library",
+        "@com_github_go_delve_delve//cmd/dlv",
+        "@com_github_golang_protobuf//protoc-gen-go",
+    ],
+)

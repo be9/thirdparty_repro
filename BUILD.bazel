@@ -17,8 +17,8 @@ filegroup(
 pkg_tar(
     name = "tools_tar",
     srcs = [":tools_multiplatform"],
-    visibility = ["//visibility:public"],
     strip_prefix = ".",
+    visibility = ["//visibility:public"],
 )
 
 pkg_tar(
@@ -27,6 +27,6 @@ pkg_tar(
         ":tools_multiplatform",
         "@thirdparty//tools:all_multi_platform",
     ],
-    visibility = ["//visibility:public"],
     strip_prefix = ".",
+    visibility = ["//visibility:public"],
 )

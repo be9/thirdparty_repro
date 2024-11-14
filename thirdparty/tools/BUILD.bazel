@@ -13,6 +13,6 @@ filegroup(
 pkg_tar(
     name = "tools_tar",
     srcs = [":all_multi_platform"],
-    visibility = ["//visibility:public"],
     strip_prefix = ".",
+    visibility = ["//visibility:public"],
 )

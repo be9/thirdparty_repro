@@ -6,7 +6,10 @@ go_library(
     srcs = ["main.go"],
     importpath = "github.com/be9/thirdparty_repro/tools/one",
     visibility = ["//visibility:private"],
-    deps = ["@org_golang_x_example_hello//reverse"],
+    deps = [
+        "@com_github_go_delve_delve//pkg/version",
+        "@org_golang_x_example_hello//reverse",
+    ],
 )
 
 go_binary(
