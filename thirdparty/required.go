@@ -6,4 +6,5 @@ import (
 	_ "github.com/daixiang0/gci"
 	_ "github.com/go-delve/delve/cmd/dlv"
 	_ "github.com/golang/protobuf/protoc-gen-go"
+	_ "github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway"
 )

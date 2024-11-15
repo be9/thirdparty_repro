@@ -19,4 +19,5 @@ use_repo(
     "com_github_daixiang0_gci",
     "com_github_go_delve_delve",
     "com_github_golang_protobuf",
+    "com_github_grpc_ecosystem_grpc_gateway",
 )
