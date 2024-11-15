@@ -12,6 +12,10 @@ go_sdk.download(version = "1.22.2")
 
 go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
 go_deps.from_file(go_mod = "//:go.mod")
+go_deps.gazelle_override(
+    build_file_generation = "clean",
+    path = "github.com/grpc-ecosystem/grpc-gateway",
+)
 
 # Use `bazel mod tidy` to update this list
 use_repo(
