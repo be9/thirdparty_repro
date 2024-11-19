@@ -7,7 +7,7 @@ passed with a `$(rootpaths ...)` substitution.
 
 ## Go static linking problem
 
-### Build/load the image
+Build/load the image:
 
 ```bash
 bazel run //:image_tarball
