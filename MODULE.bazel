@@ -3,9 +3,23 @@ module(
 )
 
 bazel_dep(name = "rules_pkg", version = "1.0.1")
-bazel_dep(name = "aspect_bazel_lib", version = "2.9.0")
+bazel_dep(name = "aspect_bazel_lib", version = "2.9.3")
+bazel_dep(name = "rules_oci", version = "2.0.1")
 bazel_dep(name = "thirdparty", version = "0.0.0")
 local_path_override(
     module_name = "thirdparty",
     path = "thirdparty",
+)
+
+oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+oci.pull(
+    name = "alpine",
+    image = "alpine:3.19.4",
+    platforms = ["linux/amd64"],
+)
+
+use_repo(
+    oci,
+    "alpine",
+    "alpine_linux_amd64",
 )
