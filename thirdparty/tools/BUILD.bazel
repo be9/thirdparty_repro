@@ -6,7 +6,7 @@ filegroup(
         "//tools/dlv:multi_platform",
         "//tools/gci:multi_platform",
         "//tools/protoc-gen-go:multi_platform",
-        "//tools/protoc-gen-grpc-gateway:multi_platform",
+        # "//tools/protoc-gen-grpc-gateway:multi_platform",
     ],
     visibility = ["//visibility:public"],
 )
