@@ -35,7 +35,7 @@ pkg_tar(
 pkg_tar(
     name = "dlv_tar",
     srcs = [
-        "//thirdparty/tools/dlv:multi_platform-linux-amd64",
+       "@thirdparty//tools/dlv:multi_platform-linux-amd64",
     ],
     visibility = ["//visibility:public"],
     strip_prefix = ".",
