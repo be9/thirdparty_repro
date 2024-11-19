@@ -42,4 +42,7 @@ oci_load(
     name = "image_tarball",
     image = ":image",
     visibility = ["//visibility:public"],
+    repo_tags = [
+      "3p_repro:latest"
+    ],
 )
