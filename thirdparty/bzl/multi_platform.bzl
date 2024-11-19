@@ -17,6 +17,7 @@ def multi_platform_binaries(name, binary, target_platforms = platforms.all):
             name = target_name,
             binary = binary,
             target_platform = platform.target_platform,
+            visibility = ["//visibility:public"],
         )
 
         target_label = Label("@{}//{}:{}".format(native.repo_name().rstrip("~"), native.package_name(), target_name))

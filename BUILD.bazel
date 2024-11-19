@@ -32,10 +32,20 @@ pkg_tar(
     visibility = ["//visibility:public"],
 )
 
+pkg_tar(
+    name = "dlv_tar",
+    srcs = [
+        "//thirdparty/tools/dlv:multi_platform-linux-amd64",
+    ],
+    visibility = ["//visibility:public"],
+    strip_prefix = ".",
+    package_dir = "app",
+)
+
 oci_image(
     name = "image",
     base = "@alpine_linux_amd64",
-    tars = [":all_tools_tar"],
+    tars = [":dlv_tar"],
 )
 
 oci_load(
