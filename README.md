@@ -5,7 +5,45 @@ A bazel workspace with a nested thirdparty tools repository.
 Here `pkg_tar` simulates publishing to S3 (in reality, it's a separate tool that gets the filegroup
 passed with a `$(rootpaths ...)` substitution.
 
-Repro:
+## Go static linking problem
+
+### Build/load the image
+
+```bash
+bazel run //:image_tarball
+# INFO: Analyzed target //:image_tarball (0 packages loaded, 0 targets configured).
+# INFO: Found 1 target...
+# Target //:image_tarball up-to-date:
+#   bazel-bin/image_tarball.sh
+# INFO: Elapsed time: 0.132s, Critical Path: 0.00s
+# INFO: 1 process: 1 internal.
+# INFO: Build completed successfully, 1 total action
+# INFO: Running command line: bazel-bin/image_tarball.sh
+# Loaded image: 3p_repro:latest
+```
+
+The binary that originates from the main repo is statically linked:
+```bash
+docker run -it --rm 3p_repro:latest app/tools/one/multi_platform-linux-amd64/one
+# delve is version.Version{Major:"1", Minor:"20", Patch:"0", Metadata:"", Build:"$Id: 8ec46ee3d275c276b8e7465d69a23399e0e14789 $"}
+# reverse of 'foo' is 'oof'
+
+docker run -it --rm 3p_repro:latest ldd app/tools/one/multi_platform-linux-amd64/one
+# /lib/ld-musl-x86_64.so.1: app/tools/one/multi_platform-linux-amd64/one: Not a valid dynamic program
+```
+
+The `dlv` that comes from `@thirdparty` is linked dynamically:
+```bash
+docker run -it --rm 3p_repro:latest  /app/external/thirdparty\~/tools/dlv/multi_platform-linux-amd64/dlv
+# exec /app/external/thirdparty~/tools/dlv/multi_platform-linux-amd64/dlv: no such file or directory
+
+docker run -it --rm 3p_repro:latest ldd /app/external/thirdparty\~/tools/dlv/multi_platform-linux-amd64/dlv
+#         /lib64/ld-linux-x86-64.so.2 (0x7a3dfd261000)
+# Error loading shared library libresolv.so.2: No such file or directory (needed by /app/external/thirdparty~/tools/dlv/multi_platform-linux-amd64/dlv)
+#         libc.so.6 => /lib64/ld-linux-x86-64.so.2 (0x7a3dfd261000)
+```
+
+## grpc-gateway problem (ignored for now)
 
 ```bash
 # Building from inside thirdparty works:
