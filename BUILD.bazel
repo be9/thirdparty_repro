@@ -1,6 +1,6 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
-load("@rules_oci//oci:defs.bzl", "oci_image")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load")
 
 gazelle(
     name = "gazelle",
@@ -36,4 +36,10 @@ oci_image(
     name = "image",
     base = "@alpine_linux_amd64",
     tars = [":all_tools_tar"],
+)
+
+oci_load(
+    name = "image_tarball",
+    image = ":image",
+    visibility = ["//visibility:public"],
 )
