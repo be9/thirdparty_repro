@@ -33,8 +33,9 @@ pkg_tar(
 )
 
 pkg_tar(
-    name = "dlv_tar",
+    name = "bins_tar",
     srcs = [
+       "//tools/one:multi_platform-linux-amd64",
        "@thirdparty//tools/dlv:multi_platform-linux-amd64",
     ],
     visibility = ["//visibility:public"],
@@ -45,7 +46,7 @@ pkg_tar(
 oci_image(
     name = "image",
     base = "@alpine_linux_amd64",
-    tars = [":dlv_tar"],
+    tars = [":bins_tar"],
 )
 
 oci_load(
